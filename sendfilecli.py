@@ -11,7 +11,8 @@ import sys
 
 # Command line checks 
 if len(sys.argv) < 2:
-	print ("USAGE python " + sys.argv[0] + "/home/adrian/Assignment1SampleCodes/Python/sendfile/small.txt" )
+	print ("USAGE python " + sys.argv[0] + " /home/adrian/Assignment1SampleCodes/Python/sendfile/big.txt" )
+	
 
 # Server address
 serverAddr = "localhost"
@@ -20,10 +21,10 @@ serverAddr = "localhost"
 serverPort = 1234
 
 # The name of the file
-fileName = "/home/adrian/Assignment1SampleCodes/Python/sendfile/small.txt"
+fileName = "/home/adrian/Assignment1SampleCodes/Python/sendfile/big.txt"
 
-# Open the file
-fileObj = open(fileName, "r")
+# Open the file in binary
+fileObj = open(fileName, "rb")
 
 # Create a TCP socket
 connSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -56,11 +57,13 @@ while True:
 		while len(dataSizeStr) < 10:
 			dataSizeStr = "0" + dataSizeStr
 	
-	
+		dataSizeBytes = dataSizeStr.encode()
+		fileData = dataSizeBytes + fileData
+
 		# Prepend the size of the data to the
 		# file data.
-		fileData = dataSizeStr + fileData	
-		
+
+
 		# The number of bytes sent
 		numSent = 0
 		

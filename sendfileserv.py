@@ -29,10 +29,10 @@ welcomeSock.listen(1)
 def recvAll(sock, numBytes):
 
 	# The buffer
-	recvBuff = ""
+	recvBuff = b""
 	
 	# The temporary buffer
-	tmpBuff = ""
+	tmpBuff = b""
 	
 	# Keep receiving till all is received
 	while len(recvBuff) < numBytes:
@@ -87,7 +87,7 @@ while True:
 	fileData = recvAll(clientSock, fileSize)
 	
 	print ("The file data is: ")
-	print (fileData)
+	print (fileData.decode())
 		
 	# Close our side
 	clientSock.close()
