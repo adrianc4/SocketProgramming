@@ -9,19 +9,24 @@ import socket
 import os
 import sys
 
+
+from cmds import *
+
 # Command line checks 
 if len(sys.argv) < 2:
-	print ("USAGE python " + sys.argv[0] + " /home/adrian/Assignment1SampleCodes/Python/sendfile/big.txt" )
+	print ("USAGE python " + sys.argv[0] + "big.txt" )
 	
 
 # Server address
-serverAddr = "localhost"
+# this is my ip and the port number is the standard one or something
+serverAddr = ('192.168.1.21', 21)
 
 # Server port
-serverPort = 1234
+# serverPort = 1234
 
 # The name of the file
-fileName = "/home/adrian/Assignment1SampleCodes/Python/sendfile/big.txt"
+# fileName = "/home/adrian/Assignment1SampleCodes/Python/sendfile/big.txt"
+fileName = "small.txt"
 
 # Open the file in binary
 fileObj = open(fileName, "rb")
@@ -30,7 +35,7 @@ fileObj = open(fileName, "rb")
 connSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect to the server
-connSock.connect((serverAddr, serverPort))
+connSock.connect(serverAddr)
 
 # The number of bytes sent
 numSent = 0
@@ -41,6 +46,14 @@ fileData = None
 # Keep sending until all is sent
 while True:
 	
+	user_input = input()
+	# this while loop loops teh ls cmd
+	while(user_input != "exit"):
+		if(user_input == 'ls'):
+			lscmd();
+		
+	# get();
+
 	# Read 65536 bytes of data
 	fileData = fileObj.read(65536)
 	
@@ -66,7 +79,6 @@ while True:
 
 		# The number of bytes sent
 		numSent = 0
-		
 		# Send the data!
 		while len(fileData) > numSent:
 			numSent += connSock.send(fileData[numSent:])
