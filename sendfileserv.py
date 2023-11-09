@@ -6,15 +6,17 @@
 # *****************************************************
 
 import socket
+import os
 
 # The port on which to listen
-listenPort = 1234
+# listenPort = 1234
 
+server_add = ('192.168.1.21', 21)
 # Create a welcome socket. 
 welcomeSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-welcomeSock.bind(('', listenPort))
+welcomeSock.bind(server_add)
 
 # Start listening on the socket
 welcomeSock.listen(1)
@@ -91,4 +93,8 @@ while True:
 		
 	# Close our side
 	clientSock.close()
+
+	#whijle loop was not breaking 
+	break;
+	print("socket is closed")
 	
