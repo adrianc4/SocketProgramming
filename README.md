@@ -4,11 +4,9 @@ CPSC 471 Project
 Group:
 
 Adrian Charbonneau
-
 Pauleena
 
 FTP Server and Client
-
 How to run:
 
 Run sendfileserv.py
@@ -16,7 +14,6 @@ Run sendfileserv.py
 Run sendfilecli.py
 
 FTP commands for client:
-
 ftp> get <file name> (downloads ﬁle <ﬁle name> from the server)
 
 ftp> put <filename> (uploads ﬁle <ﬁle name> to the server)
