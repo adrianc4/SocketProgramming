@@ -4,7 +4,8 @@ CPSC 471 Project
 Group:
 
 Adrian Charbonneau
-Pauleena
+
+Pauleena Phan
 
 FTP Server and Client
 How to run:
