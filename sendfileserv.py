@@ -9,13 +9,14 @@ import socket
 import os
 
 # The port on which to listen
-# listenPort = 1234
+hostname= 'localhost'
+listenPort = 1234
 
-server_add = ('192.168.1.21', 21)
 # Create a welcome socket. 
 welcomeSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+server_ip = socket.gethostbyname(hostname)
 # Bind the socket to the port
+server_add = (server_ip, listenPort)
 welcomeSock.bind(server_add)
 
 # Start listening on the socket
@@ -50,7 +51,24 @@ def recvAll(sock, numBytes):
 		recvBuff += tmpBuff
 	
 	return recvBuff
-		
+
+def send_file(sock):
+	file_name = clientSock.recv(1024).decode()
+
+	try:
+		with open(file_name, 'rb') as file:
+			print("Opening file from server")
+			file_data = file.read()
+			# Send the size of the file first
+			file_size_str = str(len(file_data)).zfill(10)  # 10-byte size header
+			sock.sendall(file_size_str.encode() + file_data)
+			print(f"Sent file {file_name}.")
+	except FileNotFoundError:
+		print(f"File {file_name} not found. Sending error message to client.")
+		error_message = "File not found"
+		# Sending error size and message
+		sock.sendall(str(len(error_message)).zfill(10).encode() + error_message.encode())
+
 # Accept connections forever
 while True:
 	
@@ -61,6 +79,15 @@ while True:
 	
 	print ("Accepted connection from client: ", addr)
 	print ("\n")
+
+	# Receive commands from client
+	command = clientSock.recv(1024).decode()
+
+	# Check if command is get and has a filename
+	if command.lower() == 'get':
+		send_file(clientSock)
+	else:
+		print("Invalid command received:", command)
 	
 	# The buffer to all data received from the
 	# the client.
@@ -83,6 +110,7 @@ while True:
 	# Get the file size
 	fileSize = int(fileSizeBuff)
 	
+        
 	print ("The file size is ", fileSize)
 	
 	# Get the file data
@@ -90,11 +118,11 @@ while True:
 	
 	print ("The file data is: ")
 	print (fileData.decode())
-		
+			
 	# Close our side
 	clientSock.close()
 
-	#whijle loop was not breaking 
+	#while loop was not breaking 
 	break;
 	print("socket is closed")
 	

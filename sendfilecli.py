@@ -56,15 +56,17 @@ def put_file(socket):
 	fileObj.close()
 
 def recieve_file(socket):
+
+	# Send File name to server
 	print("Enter file name: ")
 	file_name = input()
+	socket.sendall(file_name.encode())
 	file_size_str = socket.recv(10).decode()
 	if not file_size_str:
 		print("No response")
 		return
 	
 	file_size = int(file_size_str)
-
 	with open(file_name, 'wb') as file:
 		remaining = file_size
 		while remaining:
@@ -133,6 +135,9 @@ elif(login_tries == 4):
 		elif(user_input == 'put'):
 			put_file(connSock)
 		elif(user_input == 'get'):
+			# Send get request to server
+			connSock.sendall(user_input.encode())
+
 			recieve_file(connSock)
 		elif(user_input == 'quit'):
 			break
