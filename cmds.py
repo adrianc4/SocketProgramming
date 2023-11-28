@@ -14,4 +14,15 @@ def lscmd():
 	for line in subprocess.getstatusoutput('ls -l'):
 		print (line)
 
+def checkLogin():
+	login = False
+	while(login == False):
+		print(f"Please Enter Username:")
+		username_input = input()
+		print(f"Please Enter Password:")
+		password_input = input()
 
+		if(username_input != "student" and password_input != "password"):
+			print(f"Try Again")
+		else:
+			login = True
