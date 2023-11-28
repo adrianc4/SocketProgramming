@@ -4,7 +4,7 @@ This programming assingment uses python.
 
 # Group Members:
 
-Adrian Charbonneau
+Adrian Charbonneau - adriancharbonneau@csu.fullerton.edu
 
 Pauleena Phan - Pauleena2002@csu.fullerton.edu
 
