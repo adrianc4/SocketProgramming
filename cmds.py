@@ -22,7 +22,7 @@ def checkLogin():
 		print(f"Please Enter Password:")
 		password_input = input()
 
-		if(username_input != "student" and password_input != "password"):
+		if(username_input != "student" and password_input != "1234"):
 			print(f"Try Again")
 		else:
 			login = True
