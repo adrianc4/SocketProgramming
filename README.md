@@ -20,10 +20,13 @@ Run sendfilecli.py
 Login with password (1234)
 
 FTP commands for client:
+
 ftp> get  (downloads ﬁle <ﬁle name> from the server)
+
 Enter: <file_name>
 
 ftp> put (uploads ﬁle <ﬁle name> to the server and prints)
+
 Enter: <file_name> 
 
 ftp> ls (lists ﬁles on the server directory to client)
