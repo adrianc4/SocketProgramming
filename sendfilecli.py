@@ -1,9 +1,8 @@
 
 # *******************************************************************
-# This file illustrates how to send a file using an
-# application-level protocol where the first 10 bytes
-# of the message from client to server contain the file
-# size and the rest contain the file data.
+# Client file, Project 1
+# Adrian Charbonneau
+# Pauleena Phan
 # *******************************************************************
 import socket
 import os
@@ -78,8 +77,6 @@ serverAddr = '0.0.0.0'
 
 # Server port
 serverPort = 1234
-
-# server_ip = socket.gethostbyname(server_hostname)
 
 # Create a TCP socket
 connSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

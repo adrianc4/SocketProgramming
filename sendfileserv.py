@@ -1,8 +1,8 @@
 
 # *****************************************************
-# This file implements a server for receiving the file
-# sent using sendfile(). The server receives a file and
-# prints it's contents.
+# Server file, Project 1
+# Adrian Charbonneau
+# Pauleena Phan
 # *****************************************************
 
 import socket
@@ -12,30 +12,7 @@ import subprocess
 
 SERVER_PASSWORD = '1234'
 
-# The port on which to listen
-hostname= 'localhost'
-listenPort = 1234
-
-# Create a welcome socket. 
-welcomeSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_ip = socket.gethostbyname(hostname)
-# Bind the socket to the port
-server_add = (server_ip, listenPort)
-welcomeSock.bind(server_add)
-
-# Start listening on the socket
-welcomeSock.listen(1)
-
-# ************************************************
-# Receives the specified number of bytes
-# from the specified socket
-# @param sock - the socket from which to receive
-# @param numBytes - the number of bytes to receive
-# @return - the bytes received
-# *************************************************
-
 def recvAll(sock, numBytes):
-
 	# The buffer
 	recvBuff = b""
 	
@@ -84,6 +61,20 @@ def send_file(sock):
 		error_message = "File not found"
 		# Sending error size and message
 		sock.sendall(str(len(error_message)).zfill(10).encode() + error_message.encode())
+
+# The port on which to listen
+hostname= 'localhost'
+listenPort = 1234
+
+# Create a welcome socket. 
+welcomeSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_ip = socket.gethostbyname(hostname)
+# Bind the socket to the port
+server_add = (server_ip, listenPort)
+welcomeSock.bind(server_add)
+
+# Start listening on the socket
+welcomeSock.listen(1)
 
 clientSock = 0
 # Accept connections forever
